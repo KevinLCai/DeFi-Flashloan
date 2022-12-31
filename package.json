@@ -1,0 +1,23 @@
+{
+  "name": "defi-flashloan",
+  "version": "1.0.0",
+  "description": "This repository is the Flashloan Arbitrage Strategy of a larger DeFi trading project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinLCai/DeFi-Flashloan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinLCai/DeFi-Flashloan/issues"
+  },
+  "homepage": "https://github.com/KevinLCai/DeFi-Flashloan#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.12.5"
+  }
+}
