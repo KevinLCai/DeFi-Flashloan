@@ -1,10 +1,7 @@
 pragma solidity ^0.8.0;
 // SPDX-License-Identifier: MIT
 
-import "https://github.com/OpenZeppelin/openzeppelin-solidity/contracts/math/SafeMath.sol";
-
 contract FlashloanArbitrage {
-    using SafeMath for uint256;
 
     /**
      * Execute a flashloan arbitrage trade using AAVE and any two exchanges
