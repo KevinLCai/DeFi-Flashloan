@@ -45,19 +45,26 @@ contract Flashloan is FlashLoanSimpleReceiverBase {
         );
     }
 
-    function executeFlashloan(
-        address asset,
+    function executeOperation(
+        address token1,
+        address token2,
         uint256 amount,
+        address exchange1,
+        address exchange2,
         uint256 premium,
         address initiator,
         bytes calldata params
     ) external override returns (bool) {
         // logic
 
+        //exchanges token1 for token2 on exchange1
+
+        // exchanges token2 for token1 on exchange2
+
         // ensure enough funds to pay flashloan + premiums
 
         uint256 amountOwed = amount + premium;
-        IERC20(asset).approve(address(POOL), amountOwed);
+        IERC20(token1).approve(address(POOL), amountOwed);
     }
 
     receive() external payable {}
