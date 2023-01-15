@@ -1,4 +1,4 @@
-pragma solidity 0.8.17;
+pragma solidity 0.8.9;
 // SPDX-License-Identifier: MIT
 
 import {FlashLoanSimpleReceiverBase} from "@aave/core-v3/contracts/flashloan/base/FlashLoanSimpleReceiverBase.sol";
