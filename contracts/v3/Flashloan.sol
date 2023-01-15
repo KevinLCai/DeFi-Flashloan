@@ -76,11 +76,11 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
     /**
      * Selects the right exhange to make a trade with
      */
-    function exchangeTokens(address _from, address _to, address _exchange) internal returns (bool) {
+    function exchangeTokens(address _from, address _to, uint256 _amountIn, uint256 _amountOutMin, address _exchange) internal returns (bool) {
         if (_exchange == "0x1F98431c8aD98523631AE4a59f267346ea31F984") {
-            uniswapTrade(_from, _to);
+            uniswapV3Trade(_from, _to, _amountIn, _amountOutMin);
         } else if (_exchange == "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506") {
-            sushiswapTrade(_from, _to);
+            sushiswapTrade(_from, _to, _amountIn, _amountOutMin);
         }
     }
 
@@ -96,10 +96,13 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
     ) external override returns (bool) {
 
         //exchanges token1 for token2 on exchange1
-        swap1 = exchangeTokens(token1, token2, exchange1);
+
+        // double check this amount - should it be less to reduce slippage?
+
+        swap1 = exchangeTokens(token1, token2, amountIn, _amountOutMin, exchange1);
 
         // exchanges token2 for token1 on exchange2
-        swap2 = exchangeTokens(token2, token1, exchange2);
+        swap2 = exchangeTokens(token2, token1, amountIn, _amountOutMin, exchange2);
 
         // ensure enough funds to pay flashloan + premiums
         uint256 amountOwed = amount + premium;

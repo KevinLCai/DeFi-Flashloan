@@ -12,7 +12,7 @@ module.exports = {
   networks: {
     arbitrum: {
       url: process.env.ARBITRUM_ENDPOINT,
-      accounts: [process.emitWarning.PRIVATE_KEY]
+      accounts: process.emitWarning.PRIVATE_KEY
     }
   }
 };
