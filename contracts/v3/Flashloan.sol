@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import {FlashLoanSimpleReceiverBase} from "@aave/core-v3/contracts/flashloan/base/FlashLoanSimpleReceiverBase.sol";
 import {IPoolAddressesProvider} from "@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./Exchange.sol";
 
 contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
     address payable owner;
@@ -59,7 +60,7 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
         exchange2 = _exchange2;
 
         address receiverAddress = address(this);
-        address asset = _token;
+        address asset = _token1;
         uint256 amount = _amount;
         bytes memory params = "";
         uint16 referralCode = 0;
@@ -79,9 +80,10 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
     function exchangeTokens(address _from, address _to, uint256 _amountIn, uint256 _amountOutMin, address _exchange) internal returns (bool) {
         if (_exchange == "0x1F98431c8aD98523631AE4a59f267346ea31F984") {
             uniswapV3Trade(_from, _to, _amountIn, _amountOutMin);
-        } else if (_exchange == "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506") {
-            sushiswapTrade(_from, _to, _amountIn, _amountOutMin);
-        }
+        } 
+        // else if (_exchange == "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506") {
+        //     sushiswapTrade(_from, _to, _amountIn, _amountOutMin);
+        // }
     }
 
     /**
@@ -99,10 +101,12 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
 
         // double check this amount - should it be less to reduce slippage?
 
-        swap1 = exchangeTokens(token1, token2, amountIn, _amountOutMin, exchange1);
+        // swap1 = 
+        exchangeTokens(token1, token2, amount, _amountOutMin, exchange1);
 
         // exchanges token2 for token1 on exchange2
-        swap2 = exchangeTokens(token2, token1, amountIn, _amountOutMin, exchange2);
+        // swap2 = 
+        exchangeTokens(token2, token1, amount, _amountOutMin, exchange2);
 
         // ensure enough funds to pay flashloan + premiums
         uint256 amountOwed = amount + premium;
