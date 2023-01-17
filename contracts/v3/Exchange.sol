@@ -15,7 +15,7 @@ contract Exchange {
     // ISushiSwapV2Router02 sushiswapRouter;
 
 
-    constructor(address _uniswapV3Router, address _sushiswapRouter) {
+    constructor(address _uniswapV3Router) {
         uniswapV3Router = ISwapRouter(_uniswapV3Router);
         // uniswapV2Router = IUniswapV3Router(_uniswapV2Router);
         // sushiswapRouter = SushiSwapV2(_sushiswapRouter);
@@ -26,7 +26,9 @@ contract Exchange {
     // }
 
     function uniswapV3Trade(address tokenIn, address tokenOut, uint256 amountIn) public payable {
-       
+       uint256 amountOutMin;
+
+
     }
 
     // function sushiswapTrade(address _tokenIn, address _tokenOut, uint256 _amountIn, uint256 _amountOutMin, address _to) public {

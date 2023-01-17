@@ -77,13 +77,17 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
     /**
      * Selects the right exhange to make a trade with
      */
-    function exchangeTokens(address _from, address _to, uint256 _amountIn, uint256 _amountOutMin, address _exchange) internal returns (bool) {
+    function exchangeTokens(address _from, address _to, uint256 _amountIn, address _exchange) internal returns (bool) {
         if (_exchange == "0x1F98431c8aD98523631AE4a59f267346ea31F984") {
-            uniswapV3Trade(_from, _to, _amountIn, _amountOutMin);
+            uniswapV3Trade(_from, _to, _amountIn);
         } 
         // else if (_exchange == "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506") {
         //     sushiswapTrade(_from, _to, _amountIn, _amountOutMin);
         // }
+
+        // below statement will be changed to check trades went through
+        require(true && true);
+        return true;
     }
 
     /**
@@ -97,16 +101,18 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
         bytes calldata params
     ) external override returns (bool) {
 
-        //exchanges token1 for token2 on exchange1
+        
 
         // double check this amount - should it be less to reduce slippage?
 
+        //exchanges token1 for token2 on exchange1
+
         // swap1 = 
-        exchangeTokens(token1, token2, amount, _amountOutMin, exchange1);
+        exchangeTokens(token1, token2, amount, exchange1);
 
         // exchanges token2 for token1 on exchange2
         // swap2 = 
-        exchangeTokens(token2, token1, amount, _amountOutMin, exchange2);
+        exchangeTokens(token2, token1, amount, exchange2);
 
         // ensure enough funds to pay flashloan + premiums
         uint256 amountOwed = amount + premium;
