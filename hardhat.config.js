@@ -8,7 +8,20 @@ module.exports = {
       blockGasLimit: 10000000,
     },
   },
-  solidity: "0.8.0",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.0",
+      },
+      {
+        version: "0.7.0",
+      },
+      {
+        version: "0.8.10",
+        options: {} // Optionally add more options
+      }
+    ],
+  },
   networks: {
     arbitrum: {
       url: process.env.ARBITRUM_ENDPOINT,

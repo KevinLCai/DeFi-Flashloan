@@ -1,9 +1,9 @@
-pragma solidity 0.8.9;
+pragma solidity ^0.8.0;
 // SPDX-License-Identifier: MIT
 
 import {FlashLoanSimpleReceiverBase} from "@aave/core-v3/contracts/flashloan/base/FlashLoanSimpleReceiverBase.sol";
 import {IPoolAddressesProvider} from "@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol";
-import {IERC20} from "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
     address payable owner;

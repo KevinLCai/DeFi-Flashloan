@@ -22,6 +22,9 @@
   },
   "dependencies": {
     "@aave/core-v3": "^1.17.0",
+    "@openzeppelin/contracts": "^4.8.1",
+    "@uniswap/v2-core": "^1.0.1",
+    "@uniswap/v3-periphery": "^1.4.3",
     "dotenv": "^16.0.3"
   }
 }

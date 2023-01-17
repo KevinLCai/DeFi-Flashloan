@@ -1,8 +1,9 @@
-pragma solidity 0.8.9;
+pragma solidity ^0.8.0;
 // SPDX-License-Identifier: MIT
 
-import "https://github.com/Uniswap/uniswap-v2-core/contracts/interfaces/IUniswapV2Router02.sol";
-import "https://github.com/sushiswap/sushiswap-v2-core/contracts/interfaces/ISushiSwapV2Router02.sol";
+// import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
+// import '@uniswap/lib/contracts/libraries/TransferHelper.sol';
+// import "https://github.com/sushiswap/sushiswap-v2-core/contracts/interfaces/ISushiSwapV2Router02.sol";
 
 // uniswapV3 contracts
 import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
@@ -20,11 +21,15 @@ contract Exchange {
         sushiswapRouter = SushiSwapV2(_sushiswapRouter);
     }
 
-    function uniswapV3Trade(address tokenIn, address tokenOut, uint256 amountIn) public payable {
+    function uniswapV2Trade(address tokenIn, address tokenOut, uint256 amountIn) public payable {
        
     }
 
-    function sushiswapTrade(address _tokenIn, address _tokenOut, uint256 _amountIn uint256 _amountOutMin, address _to) public {
+    // function uniswapV3Trade(address tokenIn, address tokenOut, uint256 amountIn) public payable {
+       
+    // }
+
+    function sushiswapTrade(address _tokenIn, address _tokenOut, uint256 _amountIn, uint256 _amountOutMin, address _to) public {
         address pair = IUniswap;
         address[] memory path = new address[](2);
         path[0] = _tokenIn;
@@ -36,6 +41,6 @@ contract Exchange {
             path,
             _to,
             block.timestamp
-        )
+        );
     }
 }
