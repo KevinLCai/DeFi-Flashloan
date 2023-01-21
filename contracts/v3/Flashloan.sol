@@ -6,15 +6,15 @@ import {IPoolAddressesProvider} from "@aave/core-v3/contracts/interfaces/IPoolAd
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./Exchange.sol";
 
-contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
+contract Flashloan is FlashLoanSimpleReceiverBase, Exchange(0xE592427A0AEce92De3Edee1F18E0157C05861564) {
     address payable owner;
     address exchange1;
     address exchange2;
     address token1;
     address token2;
 
-    constructor() {
-        owner = msg.sender;
+    constructor(IPoolAddressesProvider _provider) FlashLoanSimpleReceiverBase(_provider) {
+        owner = payable(msg.sender);
     }
 
     modifier onlyOwner() {
@@ -40,7 +40,7 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
         token.transfer(msg.sender, token.balanceOf(address(this)));
     }
 
-    function getGasPrice() public view {
+    function getGasPrice() public view returns (uint256) {
         return block.gaslimit;
     }
 
@@ -78,7 +78,7 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
      * Selects the right exhange to make a trade with
      */
     function exchangeTokens(address _from, address _to, uint256 _amountIn, address _exchange) internal returns (bool) {
-        if (_exchange == "0x1F98431c8aD98523631AE4a59f267346ea31F984") {
+        if (_exchange == address(0x1F98431c8aD98523631AE4a59f267346ea31F984)) {
             uniswapV3Trade(_from, _to, _amountIn);
         } 
         // else if (_exchange == "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506") {
@@ -117,6 +117,9 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange {
         // ensure enough funds to pay flashloan + premiums
         uint256 amountOwed = amount + premium;
         IERC20(token1).approve(address(POOL), amountOwed);
+
+        // change return value based on if the flashloan is successful
+        return true;
     }
 
     receive() external payable {}
