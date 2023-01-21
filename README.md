@@ -4,6 +4,10 @@ This repository is the Flashloan Arbitrage Strategy of a larger DeFi trading pro
 
 Aims: This repo aims to collect pricing data across multiple exchanges, and leverage flashloans to profit off of arbitrage opportunities.
 
+Strategy:
+
+- Rather than trying to optimise for speed, I will be looking for niche arbitrage opportunities.
+
 Planned strategies include:
 
 Flashloan:

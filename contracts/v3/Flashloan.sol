@@ -97,18 +97,16 @@ contract Flashloan is FlashLoanSimpleReceiverBase, Exchange(0xE592427A0AEce92De3
         bytes calldata params
     ) external override returns (bool) {
 
-        
-
         // double check this amount - should it be less to reduce slippage?
 
         //exchanges token1 for token2 on exchange1
 
-        // swap1 = 
-        exchangeTokens(token1, token2, amount, exchange1, true);
+        bool swap1 = exchangeTokens(token1, token2, amount, exchange1, true);
+        require(swap1);
 
         // exchanges token2 for token1 on exchange2
-        // swap2 = 
-        exchangeTokens(token2, token1, amount, exchange2, false);
+        bool swap2 = exchangeTokens(token2, token1, amount, exchange2, false);
+        require(swap2);
 
         // ensure enough funds to pay flashloan + premiums
         uint256 amountOwed = amount + premium;

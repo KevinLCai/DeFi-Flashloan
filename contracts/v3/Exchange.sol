@@ -33,15 +33,13 @@ contract Exchange {
        
     // }
 
-    function uniswapV3Trade(address _tokenIn, address _tokenOut, uint256 _amountIn, bool _firstTrade) public payable {
+    function uniswapV3Trade(address _tokenIn, address _tokenOut, uint256 _amountIn, bool _firstTrade) public payable returns (bool) {
         uint256 amountOutMin;
         if (_firstTrade) {
             amountOutMin = getAmountOutMin(_amountIn);
         } else {
             amountOutMin = _amountIn;
         }
-
-        
 
         ISwapRouter.ExactInputSingleParams memory params = 
             ISwapRouter.ExactInputSingleParams({
@@ -56,7 +54,7 @@ contract Exchange {
             });
         
         uint256 amountOut = uniswapV3Router.exactInputSingle(params);
-
+        return (amountOut > 0);
     }
 
     // function sushiswapTrade(address _tokenIn, address _tokenOut, uint256 _amountIn, uint256 _amountOutMin, address _to) public {
