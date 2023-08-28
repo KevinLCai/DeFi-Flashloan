@@ -1,15 +1,16 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Flashloan = await hre.ethers.getContractFactory("Flashloan");
-  const flashloan = await Flashloan.deploy("0x5E52dEc931FFb32f609681B8438A51c675cc232d");
+  const FlashLoan = await hre.ethers.getContractFactory("FlashLoan");
+  const flashLoan = await FlashLoan.deploy(
+    "0xc4dCB5126a3AfEd129BC3668Ea19285A9f56D15D"
+  );
 
-  await flashloan.deployed();
-  console.log("Flahloan contract deployed: ", flashloan.address); 
+  await flashLoan.deployed();
+
+  console.log("Flash loan contract deployed: ", flashLoan.address);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
